@@ -13,12 +13,14 @@ const Sidebar = () => {
       <div className="flex items-center justify-between py-2">
         <div className="flex items-center gap-1">
           <IoIosArrowBack />
-          <p>Chats</p>
-          <p>img:3</p>
-          <p>msg:</p>
+  
+          <p className="hidden lg:block">Chats</p>
+          <p className="hidden lg:block">img:3</p>
+          <p className="hidden lg:block">msg:</p>
+         
         </div>
         <div className="flex items-center gap-2">
-          <HiOutlineDotsVertical />
+          <HiOutlineDotsVertical className="hidden lg:block" />
           <FaWrench />
           <FaArchway />
           <FaRegPenToSquare />
@@ -32,37 +34,37 @@ const Sidebar = () => {
           alt="user image"
         />
         <div className="absolute bottom-0 left-0 bg-second opacity-60 w-full">
-         <div className="ml-6 p-3">
+         <div className="lg:ml-6 p-3">
          <p className="text-sm">Jessica Anderson</p>
           <p className="text-xs">@jessica-anderson-2</p>
          </div>
         </div>
       </div>
       <div className="bg-[#4d1022] p-2.5">
-        <div className="flex justify-between items-center bg-second p-2 rounded-md">
-          <div className="flex items-center gap-1">
+        <div className="flex justify-between items-center bg-second p-2 rounded-md ">
+          <div className="flex items-center gap-1 ">
             <h1 className="flex items-center">
-              <MdCameraAlt />0
+              <MdCameraAlt className="hidden lg:block"/><span className="hidden lg:block">0</span>
             </h1>
             <h1 className="flex items-center">
-              <BsChat />6
+              <BsChat className="hidden lg:block" /><span className="hidden lg:block">6</span>
             </h1>
           </div>
           <div className="flex items-center gap-1">
-            <RiGitRepositoryPrivateFill />
+            <RiGitRepositoryPrivateFill className="hidden lg:block" />
             <p className="text-xs">Make Character Public</p>
-            <IoShareSocial />
+            <IoShareSocial className="hidden lg:block" />
           </div>
         </div>
         <div className="grid grid-cols-3 bg-second mt-4 py-4">
-          <div className="col-span-1">
+          <div className="col-span-1 hidden lg:block">
             <div className="flex flex-col justify-start px-1 text-xs">
               <h1 className="text-sm font-semibold">Who am I</h1>
               <div className="mt-2">
                 <h3 className="font-semibold">Personality</h3>
                 <h4>CareGiver</h4>
               </div>
-              <div>
+              <div className="mt-2">
                 <h3 className="font-semibold">Work</h3>
                 <h3>Instructor</h3>
               </div>
@@ -76,7 +78,7 @@ const Sidebar = () => {
               </div>
             </div>
           </div>
-          <div className="col-span-2 px-1">
+          <div className="col-span-3 lg:col-span-2 px-1">
             <div className="flex justify-between items-center">
               <div className="text-sm font-semibold">About me</div>
               <div>

@@ -9,20 +9,18 @@ const Navber = () => {
   const navLinks = (
     <>
       <li className="font-medium text-base">
-        {" "}
-        <NavLink to="/"><IoChatboxEllipsesSharp />Chat</NavLink>{" "}
+        
+        <NavLink to="/"><IoChatboxEllipsesSharp />Chat</NavLink>
       </li>
       <li className="font-medium text-base">
-        {" "}
-        <NavLink to="/characters"><ImUsers />My Characters</NavLink>{" "}
+        
+        <NavLink to="/characters"><ImUsers />My Characters</NavLink>
       </li>
-      <li className="font-medium text-base">
-        {" "}
-        <NavLink to="/generate-image"><FaCamera />Generate Images</NavLink>{" "}
+      <li className="font-medium text-base">  
+        <NavLink to="/generate-image"><FaCamera />Generate Images</NavLink>
       </li>
-      <li className="font-medium text-base">
-        {" "}
-        <NavLink className="bg-first" to="/create-character"><MdEditLocationAlt />Create Characters</NavLink>{" "}
+      <li className="font-medium text-base">   
+        <NavLink className="bg-first" to="/create-character"><MdEditLocationAlt />Create Characters</NavLink>
       </li>
     </>
   );
