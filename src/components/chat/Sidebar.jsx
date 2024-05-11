@@ -10,7 +10,7 @@ import { RxCross2 } from "react-icons/rx";
 const Sidebar = () => {
   return (
     <section className="">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between py-2">
         <div className="flex items-center gap-1">
           <IoIosArrowBack />
           <p>Chats</p>
@@ -25,12 +25,18 @@ const Sidebar = () => {
           <RxCross2 />
         </div>
       </div>
-      <div>
+      <div className="relative">
         <img
           className="rounded-md"
           src="https://i.ibb.co/VBZpH4F/granma.jpg"
           alt="user image"
         />
+        <div className="absolute bottom-0 left-0 bg-second opacity-60 w-full">
+         <div className="ml-6 p-3">
+         <p className="text-sm">Jessica Anderson</p>
+          <p className="text-xs">@jessica-anderson-2</p>
+         </div>
+        </div>
       </div>
       <div className="bg-[#4d1022] p-2.5">
         <div className="flex justify-between items-center bg-second p-2 rounded-md">

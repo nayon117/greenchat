@@ -1,3 +1,8 @@
+import { CgProfile } from "react-icons/cg";
+import { FaCamera } from "react-icons/fa";
+import { ImUsers } from "react-icons/im";
+import { IoChatboxEllipsesSharp } from "react-icons/io5";
+import { MdEditLocationAlt } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const Navber = () => {
@@ -5,19 +10,19 @@ const Navber = () => {
     <>
       <li className="font-medium text-base">
         {" "}
-        <NavLink to="/">Chat</NavLink>{" "}
+        <NavLink to="/"><IoChatboxEllipsesSharp />Chat</NavLink>{" "}
       </li>
       <li className="font-medium text-base">
         {" "}
-        <NavLink to="/characters">My Characters</NavLink>{" "}
+        <NavLink to="/characters"><ImUsers />My Characters</NavLink>{" "}
       </li>
       <li className="font-medium text-base">
         {" "}
-        <NavLink to="/generate-image">Generate Images</NavLink>{" "}
+        <NavLink to="/generate-image"><FaCamera />Generate Images</NavLink>{" "}
       </li>
       <li className="font-medium text-base">
         {" "}
-        <NavLink to="/create-character">Create Characters</NavLink>{" "}
+        <NavLink className="bg-first" to="/create-character"><MdEditLocationAlt />Create Characters</NavLink>{" "}
       </li>
     </>
   );
@@ -49,15 +54,14 @@ const Navber = () => {
             {navLinks}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
-          Secret<span className="bg-first rounded-md">Desires</span>
+        <a className="btn btn-ghost text-xl">Secret<span className="bg-first rounded-md">Desires</span>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Profile</a>
+        <a className="flex items-center gap-1" ><CgProfile />My Profile</a>
       </div>
     </section>
   );

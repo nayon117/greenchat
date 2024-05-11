@@ -2,14 +2,18 @@ import { useState, useRef, useEffect } from "react";
 import { BsSend } from "react-icons/bs";
 
 const ChatFeature = () => {
+
+  // states
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const chatWindowRef = useRef(null);
   const VITE_APP_OPENROUTER_API = import.meta.env.VITE_APP_OPENROUTER_API;
   const userName = "Jessica";
+  const userImage =
+    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg";
 
-  // Function to send message to OpenRouter AI and update messages state
+  // send message functionality
   const sendMessage = async () => {
     try {
       setIsLoading(true);
@@ -30,19 +34,19 @@ const ChatFeature = () => {
       const data = await response.json();
       if (data.choices && data.choices.length > 0) {
         const botResponse = data.choices[0].message.content;
-        setMessages([
-          ...messages,
-          { text: `${userName}`, isUser: true, isName: true }, // Display user's name for user's message
-          { text: inputText, isUser: true },
-          { text: botResponse, isUser: false },
-        ]);
+        const newMessage = {
+          userQuestion: inputText,
+          botResponse: botResponse,
+        };
+        await sendChatToBackend(newMessage);
+        setMessages([...messages, newMessage]);
       } else {
-        setMessages([
-          ...messages,
-          { text: `${userName}`, isUser: true, isName: true }, // Display user's name for user's message
-          { text: inputText, isUser: true },
-          { text: "Sorry, I couldn't understand that.", isUser: false },
-        ]);
+        const newMessage = {
+          userQuestion: inputText,
+          botResponse: "Sorry, I couldn't understand that.",
+        };
+        await sendChatToBackend(newMessage);
+        setMessages([...messages, newMessage]);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -51,39 +55,81 @@ const ChatFeature = () => {
     }
   };
 
-  // Function to handle user input change
+  // send chat to backend
+  const sendChatToBackend = async (chatData) => {
+    try {
+      const response = await fetch("http://localhost:5000/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(chatData),
+      });
+      if (!response.ok) {
+        console.error("Failed to send chat to backend");
+      }
+    } catch (error) {
+      console.error("Error sending chat to backend:", error);
+    }
+  };
+
+  // fetch messages from backend
+  const fetchMessages = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/messages");
+      const data = await response.json();
+      setMessages(data);
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, []);
+
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
-  // Function to handle form submission
+  // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (inputText.trim() !== "") {
-      await sendMessage(); // Send message if input is not empty
-      setInputText(""); // Clear input field after sending message
+      await sendMessage();
+      setInputText("");
     }
   };
 
-  // Scroll to the bottom of the chat window when messages change
+  // scroll to bottom of chat window
   useEffect(() => {
     chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
   }, [messages]);
 
   return (
     <section className="flex flex-col h-screen">
-      <div className="chat-window flex-grow mt-20 overflow-y-auto" ref={chatWindowRef}>
+      <div
+        className="chat-window flex-grow mt-20 overflow-y-auto"
+        ref={chatWindowRef}
+      >
         {messages.map((msg, index) => (
           <div key={index} className="mb-6">
-            {msg.isName && (
-              <div className="flex items-center">
-                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"  className="h-6 w-6 rounded-full mr-2" />
-                <p>{msg.text}</p> {/* Display name */}
+            {msg.userQuestion && (
+              <div className="flex items-center mb-2">
+                <img
+                  src={userImage}
+                  alt="User"
+                  className="h-6 w-6 rounded-full mr-2"
+                />
+                <p className="text-xs text-gray-400">{userName}</p>
               </div>
             )}
-            {!msg.isName && (
-              <div className={msg.isUser ? "user-message bg-first p-2 rounded-md" : "bot-message"}>{msg.text}</div>
+            {msg.userQuestion && (
+              <div className="flex items-center">
+                <p className="chat-bubble bg-first ml-6">{msg.userQuestion}</p>
+              </div>
             )}
+            <div className="mt-5">{msg.botResponse}</div>
           </div>
         ))}
       </div>

@@ -7,7 +7,7 @@ const Chat = () => {
       <div className="col-span-1">
         <Sidebar />
       </div>
-      <div className="col-span-3">
+      <div className="col-span-3 px-3">
         <ChatFeature />
       </div>
     </section>
