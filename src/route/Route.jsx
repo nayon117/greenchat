@@ -1,19 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
-import Home from "../pages/home/Home";
-
+import Chat from "../pages/chat/Chat";
 
 const myCreatedRoute = createBrowserRouter([
-    {
-        path:"/",
-        element:<MainLayout/>,
-        children:[
-            {
-                path:'/',
-                element:<Home/>
-            }
-        ]
-    }
-])
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Chat />,
+      },
+    ],
+  },
+]);
 
 export default myCreatedRoute;
